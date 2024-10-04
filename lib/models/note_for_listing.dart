@@ -1,13 +1,15 @@
+// Utilisez ? pour indiquer que la valeur peut être nulle
+
 class NoteForListing {
-  String noteID;
-  String noteTitle;
-  String createDataTime;
-  String lastesEditDataTime;
+  final String noteID;
+  final String noteTitle;
+  final DateTime? createDateTime;
+  final DateTime? latestEditDateTime;
 
   NoteForListing({
     required this.noteID,
     required this.noteTitle,
-    required this.createDataTime,
-    required this.lastesEditDataTime,
+    required this.createDateTime,
+    required this.latestEditDateTime,
   });
 }

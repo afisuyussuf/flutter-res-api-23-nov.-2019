@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rest_api/models/note_for_listing.dart';
+import 'package:rest_api/services/notes_service.dart';
 import 'package:rest_api/views/note_delete.dart';
 import 'package:rest_api/views/note_modify.dart';
 
-class NoteList extends StatelessWidget {
-  // variables et data de pour la liste
-  final notes = [
-    NoteForListing(
-      noteID: "1",
-      noteTitle: "Note 1",
-      createDataTime: "12/02/2021",
-      lastesEditDataTime: "25/03/2021",
-    ),
-    NoteForListing(
-      noteID: "1",
-      noteTitle: "Note 2",
-      createDataTime: "12/02/2021",
-      lastesEditDataTime: "25/03/2021",
-    ),
-    NoteForListing(
-      noteID: "1",
-      noteTitle: "Note 2",
-      createDataTime: "12/02/2021",
-      lastesEditDataTime: "25/03/2021",
-    ),
-  ];
-  // format de date time JOUR/MOIS/ANNNEE
-  formatDateTime(DateTime dateTime) {
+class NoteList extends StatefulWidget {
+  const NoteList({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _NoteListState createState() => _NoteListState();
+}
+
+class _NoteListState extends State<NoteList> {
+  //API get_it^3.0.3 dependencies
+  NotesService get service => GetIt.I<NotesService>();
+
+  //call list api
+  List<NoteForListing> notes = [];
+
+  //format de dateTime
+  String formatDateTime(DateTime? dateTime) {
+    if (dateTime == null) return 'No date available';
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
+  @override
+  void initState() {
+    notes = service.getNotesList();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('List of notes')),
+      appBar: AppBar(title: const Text('List of notes')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => NoteModify(
+              builder: (_) => const NoteModify(
                     noteID: '',
                   )));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: ListView.separated(
-        separatorBuilder: (_, __) => Divider(height: 1, color: Colors.green),
+        separatorBuilder: (_, __) =>
+            const Divider(height: 1, color: Colors.green),
         itemBuilder: (_, index) {
           return Dismissible(
             key: ValueKey(notes[index].noteID),
@@ -52,16 +55,16 @@ class NoteList extends StatelessWidget {
             onDismissed: (direction) {},
             confirmDismiss: (direction) async {
               final result = await showDialog(
-                  context: context, builder: (_) => NoteDelete());
-              print(result);
+                  context: context, builder: (_) => const NoteDelete());
+              //print(result);
               return result;
             },
             background: Container(
               color: Colors.red,
-              padding: EdgeInsets.only(left: 16),
-              child: Align(
-                child: Icon(Icons.delete, color: Colors.white),
+              padding: const EdgeInsets.only(left: 16),
+              child: const Align(
                 alignment: Alignment.centerLeft,
+                child: Icon(Icons.delete, color: Colors.white),
               ),
             ),
             child: ListTile(
@@ -69,8 +72,9 @@ class NoteList extends StatelessWidget {
                 notes[index].noteTitle,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              //${formatDateTime(notes[index].lastesEditDataTime as DateTime)}
-              subtitle: Text('Last edited on 12/12/1212'),
+              subtitle: Text(
+                'Last edited on ${formatDateTime(notes[index].latestEditDateTime ?? DateTime.now())}',
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => NoteModify(noteID: notes[index].noteID)));

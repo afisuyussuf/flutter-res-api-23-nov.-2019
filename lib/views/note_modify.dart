@@ -5,7 +5,7 @@ class NoteModify extends StatelessWidget {
   final String noteID;
   // ignore: unnecessary_null_comparison
   bool get isEditing => noteID != null;
-  NoteModify({required this.noteID});
+  const NoteModify({super.key, required this.noteID});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class NoteModify extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 hintText: 'Note title',
               ),
             ),
             Container(height: 8),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 hintText: 'Note content',
               ),
@@ -31,7 +31,8 @@ class NoteModify extends StatelessWidget {
               width: double.infinity,
               height: 35,
               child: ElevatedButton(
-                child: Text('Submit', style: TextStyle(color: Colors.amber)),
+                child:
+                    const Text('Submit', style: TextStyle(color: Colors.amber)),
                 onPressed: () {},
               ),
             ),

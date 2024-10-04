@@ -6,17 +6,17 @@ class NoteDelete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Warning'),
-      content: Text('Are you sure you want to delete this note?'),
+      title: const Text('Warning'),
+      content: const Text('Are you sure you want to delete this note?'),
       actions: [
         ElevatedButton(
-          child: Text('Yes'),
+          child: const Text('Yes'),
           onPressed: () {
             Navigator.of(context).pop(true);
           },
         ),
         ElevatedButton(
-          child: Text('No'),
+          child: const Text('No'),
           onPressed: () {
             Navigator.of(context).pop(false);
           },
