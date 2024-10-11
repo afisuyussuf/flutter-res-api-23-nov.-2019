@@ -31,8 +31,10 @@ class NoteModify extends StatelessWidget {
               width: double.infinity,
               height: 35,
               child: ElevatedButton(
-                child:
-                    const Text('Submit', style: TextStyle(color: Colors.amber)),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(color: Colors.amber),
+                ),
                 onPressed: () {},
               ),
             ),

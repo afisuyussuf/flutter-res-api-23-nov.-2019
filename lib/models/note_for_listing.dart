@@ -1,5 +1,4 @@
 // Utilisez ? pour indiquer que la valeur peut être nulle
-
 class NoteForListing {
   final String noteID;
   final String noteTitle;

@@ -21,8 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 21, 209, 21)),
-        //useMaterial3: true,
+          seedColor: const Color.fromARGB(255, 21, 209, 21),
+        ),
+        useMaterial3: true,
       ),
       home: const NoteList(),
     );
