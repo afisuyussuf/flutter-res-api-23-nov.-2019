@@ -99,7 +99,7 @@ class _NoteListState extends State<NoteList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => const NoteModify(
+              builder: (_) => NoteModify(
                     noteID: '',
                   )));
         },

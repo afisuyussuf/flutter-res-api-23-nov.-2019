@@ -1,7 +1,7 @@
+import 'dart:convert';
 import 'package:rest_api/models/api_response.dart';
 import 'package:rest_api/models/note_for_listing.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class NotesService {
   static const API = 'http://api.notes.programmingaddict.com';
